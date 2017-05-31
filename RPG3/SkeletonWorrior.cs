@@ -7,9 +7,14 @@ namespace RPG3
 		public string weaponName { get; set; }
 
 		public SkeletonWorrior(string name, string WeaponS)
-			:base(name)
+			: base(name)
 		{
 			weaponName = WeaponS;
+		}
+
+		public void Ignore()
+		{
+
 		}
 
 		public override int _DamageSet()
@@ -35,7 +40,7 @@ namespace RPG3
 		{
 			return $"enermy name = {_Name} {Environment.NewLine} health = {_health} {Environment.NewLine} speed = {_speed} {Environment.NewLine} weapon = {weaponName} {Environment.NewLine} weapon damage = {_weaponDamage}";
 		}
-	
+
 
 	}
 }
