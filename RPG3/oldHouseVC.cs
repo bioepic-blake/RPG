@@ -78,6 +78,10 @@ namespace RPG3
 		string EnermyName;
 		string EnermyWeapon;
 
+		public bool shieldB = false;
+		public bool holy = false;
+		public bool spectral = false;
+
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
@@ -123,7 +127,7 @@ namespace RPG3
 			enermyIN();
 			startAreaString();
 			playerStatsM();
-
+			pickups();
 			//================== button event handlers
 			_travelBTN.TouchUpInside += BtnTravelC;
 			_subButton.TouchUpInside += BtnSubC;
@@ -232,6 +236,8 @@ namespace RPG3
 			int result = Ehealth - Pdamage;
 			string resultS = result.ToString();
 
+			if (Ehealth <= 7)
+			{ travel = true; }
 
 			if (result >= 1)
 			{
@@ -245,6 +251,8 @@ namespace RPG3
 			{
 				_EnermyHealth.Text = "dead";
 				enermyDead = true;
+				travel = true;
+
 
 				string narator = $"the {EnermyName} fell apartin its bones you find 2 health pots ";
 				_LblNarrater.Text = narator;
@@ -357,8 +365,6 @@ namespace RPG3
 			enermy worriorSkeleton = new SkeletonWorrior("worriorSkeleton", "sword");
 
 
-
-
 			List<enermy> enermys = new List<enermy>()
 			{
 			   worriorSkeleton
@@ -395,6 +401,11 @@ namespace RPG3
 					OHvc.Player_Speed = _PlayerSpeed.Text;
 					OHvc.Player_Damage = _PlayerDamage.Text;
 					OHvc.HealthPotsString = _HealthPots.Text;
+
+					OHvc.shieldB = shieldB;
+					OHvc.holy = holy;
+					OHvc.spectral = spectral;
+
 				}
 				else if (movementNumber == 1)
 				{
@@ -405,6 +416,10 @@ namespace RPG3
 					BHvc.Player_Speed = _PlayerSpeed.Text;
 					BHvc.Player_Damage = _PlayerDamage.Text;
 					BHvc.HealthPotsString = _HealthPots.Text;
+
+					//BHvc.shieldB = shieldB;
+					//BHvc.holy = holy;
+					//BHvc.spectral = spectral;
 				}
 				else if (movementNumber == 2)
 				{
@@ -416,6 +431,10 @@ namespace RPG3
 					Mvc.Player_Damage = _PlayerDamage.Text;
 					Mvc.HealthPotsString = _HealthPots.Text;
 
+					//Mvc.shieldB = shieldB;
+					//Mvc.holy = holy;
+					//Mvc.spectral = spectral;
+
 				}
 				else if (movementNumber == 3)
 				{
@@ -426,6 +445,10 @@ namespace RPG3
 					FOrestvc.Player_Speed = _PlayerSpeed.Text;
 					FOrestvc.Player_Damage = _PlayerDamage.Text;
 					FOrestvc.HealthPotsString = _HealthPots.Text;
+
+					//FOrestvc.shieldB = shieldB;
+					//FOrestvc.holy = holy;
+					//FOrestvc.spectral = spectral;
 				}
 				else if (movementNumber == 4)
 				{
@@ -436,6 +459,10 @@ namespace RPG3
 					Fvc.Player_Speed = _PlayerSpeed.Text;
 					Fvc.Player_Damage = _PlayerDamage.Text;
 					Fvc.HealthPotsString = _HealthPots.Text;
+
+					//Fvc.shieldB = shieldB;
+					//Fvc.holy = holy;
+					//Fvc.spectral = spectral;
 				}
 				else if (movementNumber == 5)
 				{
@@ -446,6 +473,10 @@ namespace RPG3
 					Lvc.Player_Speed = _PlayerSpeed.Text;
 					Lvc.Player_Damage = _PlayerDamage.Text;
 					Lvc.HealthPotsString = _HealthPots.Text;
+
+					//Lvc.shieldB = shieldB;
+					//Lvc.holy = holy;
+					//Lvc.spectral = spectral;
 				}
 			}
 			else
@@ -462,8 +493,34 @@ namespace RPG3
 			}
 
 		}
+		//==========================================================pickup labels controler
+		public void pickups()
+		{
+			if (shieldB == false)
+			{ _shield.Text = ""; }
+			else
+			{ _shield.Text = "shield"; }
 
 
+			if (holy == false)
+			{
+				_holyWeapon.Text = "";
+			}
+			else
+			{
+				_holyWeapon.Text = "holy weapon";
+			}
+
+
+			if (spectral == false)
+			{
+				_tears.Text = "";
+			}
+			else
+			{
+				_tears.Text = "spectral tear";
+			}
+		}
 
 
 
@@ -755,23 +812,23 @@ namespace RPG3
 		//========================================player items labels
 		public void StearsM()
 		{
-			var rect = new CGRect(200, 360, 100, 50);
+			var rect = new CGRect(190, 380, 100, 100);
 			_tears = new UILabel(rect);
-			_tears.Text = "Spectral tear's";
+			//_tears.Text = "Spectral tear";
 			View.Add(_tears);
 		}
 		public void ShieldM()
 		{
-			var rect = new CGRect(200, 380, 100, 50);   
+			var rect = new CGRect(190, 365, 100, 50);
 			_shield = new UILabel(rect);
-			_shield.Text = "shield";
+			//_shield.Text = "shield";
 			View.Add(_shield);
 		}
 		public void HolyWeaponM()
 		{
-			var rect = new CGRect(200, 400, 100, 50);
+			var rect = new CGRect(190, 385, 100, 50);
 			_holyWeapon = new UILabel(rect);
-			_holyWeapon.Text = "holy weapon";
+			//	_holyWeapon.Text = "holy weapon";
 			View.Add(_holyWeapon);
 		}
 
