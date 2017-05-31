@@ -1,0 +1,34 @@
+﻿<Properties StartupConfiguration="{C856D6B8-E7B0-4D74-A3D8-97AB8E05F760}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="RPG3/SkeletonWorrior.cs">
+    <Files>
+      <File FileName="RPG3/ViewController.cs" Line="38" Column="3" />
+      <File FileName="RPG3/oldHouseVC.cs" Line="715" Column="4" />
+      <File FileName="RPG3/boatHouseVC.cs" Line="42" Column="32" />
+      <File FileName="RPG3/mineVC.cs" Line="40" Column="32" />
+      <File FileName="RPG3/forestVC.cs" Line="42" Column="32" />
+      <File FileName="RPG3/fieldVC.cs" Line="42" Column="32" />
+      <File FileName="RPG3/lakeVC.cs" Line="29" Column="37" />
+      <File FileName="RPG3/enermy.cs" Line="10" Column="13" />
+      <File FileName="RPG3/SkeletonWorrior.cs" Line="5" Column="3" />
+      <File FileName="RPG3/zombie.cs" Line="25" Column="4" />
+      <File FileName="RPG3/goast.cs" Line="35" Column="1" />
+      <File FileName="RPG3/arcaneHunter.cs" Line="37" Column="1" />
+      <File FileName="RPG3/siren.cs" Line="37" Column="2" />
+      <File FileName="RPG3/playerInheritance.cs" Line="6" Column="26" />
+      <File FileName="RPG3/Player.cs" Line="11" Column="24" />
+      <File FileName="RPG3/playerStatsControl.cs" Line="28" Column="12" />
+      <File FileName="RPG3/Main.cs" Line="12" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Catchpoint exceptionName="System.Exception" includeSubclasses="True" />
+      <Breakpoint file="/Users/blakemorgan/Desktop/RPG3/RPG3/playerStatsControl.cs" relfile="RPG3/playerStatsControl.cs" line="52" column="1" />
+      <Breakpoint file="/Users/blakemorgan/Desktop/RPG3/RPG3/playerStatsControl.cs" relfile="RPG3/playerStatsControl.cs" line="50" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.RPG3 PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.CA8C4211-A6FD-4A58-99F9-7CDCD50A0A76" />
+  <MultiItemStartupConfigurations />
+</Properties>
