@@ -12,10 +12,7 @@ namespace RPG3
 			weaponName = WeaponS;
 		}
 
-		public void Ignore()
-		{
 
-		}
 
 		public override int _DamageSet()
 		{
