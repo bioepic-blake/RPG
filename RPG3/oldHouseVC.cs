@@ -44,7 +44,17 @@ namespace RPG3
 		private UITextField _tfAreaString;
 
 		private UILabel _LblNarrater;
+		private UILabel _lblPspeed;
+		private UILabel _lblPdamage;
+		private UILabel _lblPheath;
 
+		private UILabel _lblEhealth;
+		private UILabel _lblEdamage;
+		private UILabel _lblEspeed;
+
+		private UILabel _tears;
+		private UILabel _shield;
+		private UILabel _holyWeapon;
 
 		private UIButton _subButton;
 		private UIButton _AddButton;
@@ -65,7 +75,8 @@ namespace RPG3
 		public bool enermyDead = false;
 		public bool defendYN = false;
 
-
+		string EnermyName;
+		string EnermyWeapon;
 
 		public override void ViewDidLoad()
 		{
@@ -84,7 +95,15 @@ namespace RPG3
 
 			//============ labels
 			LblNt();
-			//Lbl_healthM();
+			lblPdamageM();
+			lblPspeedM();
+			lblPhealth();
+			lblEspeedM();
+			lblEdamageM();
+			lblEhealth();
+			StearsM();
+			ShieldM();
+			HolyWeaponM();
 
 			//================movement text field's
 			TFareaNum();
@@ -116,7 +135,7 @@ namespace RPG3
 
 
 		}
-		//==============enermy attack event ==================================
+		//==============enermy attack method ==================================
 		public void enermyAttack()
 		{
 			int Phelth = Int32.Parse(_PlayerHealth.Text);
@@ -128,7 +147,7 @@ namespace RPG3
 			{
 				_PlayerHealth.Text = resultS;
 
-				string narator = $" the skelinton atacked you back for {_Enermydamage.Text} damage";
+				string narator = $" the {EnermyName} atacked you with {EnermyWeapon} for {_Enermydamage.Text} damage";
 				_LblNarrater.Text = _LblNarrater.Text + narator;
 			}
 			else
@@ -158,7 +177,7 @@ namespace RPG3
 				_PlayerHealth.Text = resultS;
 
 
-				string narator = $" the skelinton atacked you back for {Edamage} damage";
+				string narator = $" the {EnermyName} atacked you with {EnermyWeapon} for {Edamage} damage";
 				_LblNarrater.Text = _LblNarrater.Text + narator;
 			}
 			else
@@ -188,7 +207,7 @@ namespace RPG3
 				_PlayerHealth.Text = resultS;
 
 
-				string narator = $" the skelinton atacked you back for {Edamage} damage";
+				string narator = $" the {EnermyName} atacked you with {EnermyWeapon} for {Edamage} damage";
 				_LblNarrater.Text = _LblNarrater.Text + narator;
 			}
 			else
@@ -227,7 +246,7 @@ namespace RPG3
 				_EnermyHealth.Text = "dead";
 				enermyDead = true;
 
-				string narator = $"the skelinton fell apartin its bones you find 2 health pots ";
+				string narator = $"the {EnermyName} fell apartin its bones you find 2 health pots ";
 				_LblNarrater.Text = narator;
 				string pots = "2";
 				_HealthPots.Text = pots;
@@ -275,7 +294,7 @@ namespace RPG3
 			}
 			else if (Pspeed <= Espeed)
 			{
-				string healed = "your to slow to run away enemy has a dobble hit";
+				string healed = $"your to slow to run away {EnermyName} has a dobble hit";
 				_LblNarrater.Text = healed;
 				travel = false;
 				enermyAttackDouble();
@@ -283,7 +302,7 @@ namespace RPG3
 			}
 			if (escape == 3)
 			{
-				string healed = "enermy has fallen, take a chance and run now!!!";
+				string healed = $"{EnermyName} has fallen, take a chance and run now!!!";
 				_LblNarrater.Text = healed;
 				travel = true;
 				escape = 0;
@@ -315,7 +334,7 @@ namespace RPG3
 			}
 			else
 			{
-				string healed = "you have no pots to heal with free hit for the enermy";
+				string healed = $"you have no pots to heal with free hit for the {EnermyName}";
 				_LblNarrater.Text = healed;
 				enermyAttack();
 			}
@@ -337,10 +356,14 @@ namespace RPG3
 		{
 			enermy worriorSkeleton = new SkeletonWorrior("worriorSkeleton", "sword");
 
+
+
+
 			List<enermy> enermys = new List<enermy>()
 			{
 			   worriorSkeleton
 			};
+
 
 
 			foreach (var i in enermys)
@@ -349,6 +372,8 @@ namespace RPG3
 				_EnermySpeed.Text = i._speedSet().ToString();
 				_Enermydamage.Text = i._DamageSet().ToString();
 
+				EnermyName = string.Format("{0}", i._Name);
+				EnermyWeapon = string.Format("{0}", i._weapon);
 			}
 
 
@@ -549,6 +574,9 @@ namespace RPG3
 				_TfArea.Text = movementNumber.ToString();
 				areaString = array1[0];
 				_tfAreaString.Text = areaString;
+				//============================================= test's
+
+
 
 			}
 		}
@@ -669,7 +697,7 @@ namespace RPG3
 			_TfArea.TextAlignment = UITextAlignment.Center;
 			View.Add(_TfArea);
 		}
-		//===================================== labels
+		//===================================== labels==================================
 		private void LblNt()
 		{
 			var rect = new CGRect(25, 60, 300, 130);
@@ -682,20 +710,76 @@ namespace RPG3
 			_LblNarrater.Text = "you enter the old house and are attacked by a skeleton";
 			View.Add(_LblNarrater);
 		}
-		//public void L_heahM()
-		//{
-		//	var rect = 250 CGRect(25, 30 150, 25);
-		//	Lbl_health = new UIbel(rect);
-		//	_LblNarraterText.Text "health";
-		//	View.Add(L_health);
-
-		//}
+		public void lblPspeedM()
+		{
+			var rect = new CGRect(25, 300, 100, 50);
+			_lblPspeed = new UILabel(rect);
+			_lblPspeed.Text = "Speed";
+			View.Add(_lblPspeed);
+		}
+		public void lblPdamageM()
+		{
+			var rect = new CGRect(25, 240, 100, 50);
+			_lblPdamage = new UILabel(rect);
+			_lblPdamage.Text = " Damage";
+			View.Add(_lblPdamage);
+		}
+		public void lblPhealth()
+		{
+			var rect = new CGRect(25, 180, 100, 50);
+			_lblPheath = new UILabel(rect);
+			_lblPheath.Text = "Health";
+			View.Add(_lblPheath);
+		}
+		public void lblEspeedM()
+		{
+			var rect = new CGRect(225, 300, 100, 50);
+			_lblEspeed = new UILabel(rect);
+			_lblEspeed.Text = "Speed";
+			View.Add(_lblEspeed);
+		}
+		public void lblEdamageM()
+		{
+			var rect = new CGRect(225, 240, 100, 50);
+			_lblEdamage = new UILabel(rect);
+			_lblEdamage.Text = "Damage";
+			View.Add(_lblEdamage);
+		}
+		public void lblEhealth()
+		{
+			var rect = new CGRect(225, 180, 100, 50);
+			_lblEhealth = new UILabel(rect);
+			_lblEhealth.Text = "Health";
+			View.Add(_lblEhealth);
+		}
+		//========================================player items labels
+		public void StearsM()
+		{
+			var rect = new CGRect(200, 360, 100, 50);
+			_tears = new UILabel(rect);
+			_tears.Text = "Spectral tear's";
+			View.Add(_tears);
+		}
+		public void ShieldM()
+		{
+			var rect = new CGRect(200, 380, 100, 50);   
+			_shield = new UILabel(rect);
+			_shield.Text = "shield";
+			View.Add(_shield);
+		}
+		public void HolyWeaponM()
+		{
+			var rect = new CGRect(200, 400, 100, 50);
+			_holyWeapon = new UILabel(rect);
+			_holyWeapon.Text = "holy weapon";
+			View.Add(_holyWeapon);
+		}
 
 
 		//======================= player stats text fields
 		public void PHealth()
 		{
-			var rect = new CGRect(25, 175, 100, 40);
+			var rect = new CGRect(25, 215, 100, 40);
 			_PlayerHealth = new UITextField(rect);
 			_PlayerHealth.Layer.BorderWidth = 3f;
 			_PlayerHealth.Layer.BorderColor = UIColor.Green.CGColor;
@@ -705,7 +789,7 @@ namespace RPG3
 		}
 		public void PDamage()
 		{
-			var rect = new CGRect(25, 230, 100, 40);
+			var rect = new CGRect(25, 275, 100, 40);
 			_PlayerDamage = new UITextField(rect);
 			_PlayerDamage.Layer.BorderColor = UIColor.Green.CGColor;
 			_PlayerDamage.Layer.BorderWidth = 3f;
@@ -728,7 +812,7 @@ namespace RPG3
 		//============================================== enermy stats text fields
 		public void EHealth()
 		{
-			var rect = new CGRect(225, 175, 100, 40);
+			var rect = new CGRect(225, 215, 100, 40);
 			_EnermyHealth = new UITextField(rect);
 			_EnermyHealth.Layer.BorderWidth = 3f;
 			_EnermyHealth.Layer.BorderColor = UIColor.Red.CGColor;
@@ -738,7 +822,7 @@ namespace RPG3
 		}
 		public void EDamage()
 		{
-			var rect = new CGRect(225, 230, 100, 40);
+			var rect = new CGRect(225, 275, 100, 40);
 			_Enermydamage = new UITextField(rect);
 			_Enermydamage.Layer.BorderColor = UIColor.Red.CGColor;
 			_Enermydamage.Layer.BorderWidth = 3f;
@@ -749,7 +833,7 @@ namespace RPG3
 		}
 		public void ESpeed()
 		{
-			var rect = new CGRect(225, 285, 100, 40);
+			var rect = new CGRect(225, 335, 100, 40);
 			_EnermySpeed = new UITextField(rect);
 			_EnermySpeed.Layer.BorderWidth = 3f;
 			_EnermySpeed.Layer.BorderColor = UIColor.Red.CGColor;

@@ -6,10 +6,10 @@ namespace RPG3
 
 		public string weaponName { get; set; }
 
-		public siren(string name, string weaponZ)
-			: base(name)
+		public siren(string name, string WeaponS)
+			: base(name, WeaponS)
 		{
-			weaponName = weaponZ;
+			weaponName = WeaponS;
 		}
 
 		public override int _DamageSet()

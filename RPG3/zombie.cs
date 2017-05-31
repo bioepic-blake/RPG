@@ -5,10 +5,10 @@ namespace RPG3
 	{
 		public string weaponName { get; set; }
 
-		public zombie(string name, string WeaponZ)
-			: base(name)
+		public zombie(string name, string WeaponS)
+			: base(name, WeaponS)
 		{
-			weaponName = WeaponZ;
+			weaponName = WeaponS;
 
 		}
 		public override int _DamageSet()

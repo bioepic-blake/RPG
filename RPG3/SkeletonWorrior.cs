@@ -4,15 +4,21 @@ namespace RPG3
 	public class SkeletonWorrior : enermy
 	{
 
-		public string weaponName { get; set; }
+		//public string weaponName { get; set; }
 
 		public SkeletonWorrior(string name, string WeaponS)
-			: base(name)
+			: base(name, WeaponS)
+
 		{
-			weaponName = WeaponS;
+		//	weaponName = WeaponS;
 		}
 
+		public string getWeapon()
+		{
+			string weapon = "sword";
+			return weapon;
 
+		}
 
 		public override int _DamageSet()
 		{
@@ -35,7 +41,7 @@ namespace RPG3
 
 		public override string ToString()
 		{
-			return $"enermy name = {_Name} {Environment.NewLine} health = {_health} {Environment.NewLine} speed = {_speed} {Environment.NewLine} weapon = {weaponName} {Environment.NewLine} weapon damage = {_weaponDamage}";
+			return $"enermy name"; // = {_Name} {Environment.NewLine} health = {_health} {Environment.NewLine} speed = {_speed} {Environment.NewLine} weapon = {weaponName} {Environment.NewLine} weapon damage = {_weaponDamage}";
 		}
 
 
