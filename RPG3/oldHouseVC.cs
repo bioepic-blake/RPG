@@ -125,7 +125,7 @@ namespace RPG3
 			//===================other methods to call 
 			arrayArea();
 			enermyIN();
-            LblNt();
+			LblNt();
 			startAreaString();
 			playerStatsM();
 			pickups();
@@ -258,8 +258,10 @@ namespace RPG3
 
 				string narator = $"the {EnermyName} fell apartin its bones you find 2 health pots ";
 				_LblNarrater.Text = narator;
-				string pots = "2";
-				_HealthPots.Text = pots;
+				int potsInt = Int32.Parse(_HealthPots.Text);
+				potsInt += 2;
+				string pots1 = potsInt.ToString();
+				_HealthPots.Text = pots1;
 			}
 			int PH = Int32.Parse(_PlayerHealth.Text);
 			if (PH <= 0)
@@ -360,6 +362,10 @@ namespace RPG3
 			_PlayerSpeed.Text = Player_Speed;
 			_PlayerDamage.Text = Player_Damage;
 			_HealthPots.Text = HealthPotsString;
+				if (string.IsNullOrEmpty(_HealthPots.Text))// if empty health pots text field = 0;
+			{
+				_HealthPots.Text = "0";
+			}
 		}
 
 		//=============================================enermy inheritance
@@ -389,188 +395,189 @@ namespace RPG3
 			EnermyName = name;
 			string weapon = sw.weaponName;
 			EnermyWeapon = weapon;
+		
 		}
 
 		//=================================  travel ( view controler ) button //controles 
-private void BtnTravelC(object sender, EventArgs e)
-{
-	if (travel == true)
-	{
-
-
-		if (movementNumber == 0)
+		private void BtnTravelC(object sender, EventArgs e)
 		{
-			OHvc = new oldHouseVC();
-			this.NavigationController.PushViewController(OHvc, true);
-
-			OHvc.Player_Health = _PlayerHealth.Text;
-			OHvc.Player_Speed = _PlayerSpeed.Text;
-			OHvc.Player_Damage = _PlayerDamage.Text;
-			OHvc.HealthPotsString = _HealthPots.Text;
-
-			if (shieldB == true)
+			if (travel == true)
 			{
-				OHvc.shieldB = true;
-				OHvc.defendYN = true;
-			}
 
-			if (holy == true)
+
+				if (movementNumber == 0)
+				{
+					OHvc = new oldHouseVC();
+					this.NavigationController.PushViewController(OHvc, true);
+
+					OHvc.Player_Health = _PlayerHealth.Text;
+					OHvc.Player_Speed = _PlayerSpeed.Text;
+					OHvc.Player_Damage = _PlayerDamage.Text;
+					OHvc.HealthPotsString = _HealthPots.Text;
+
+					if (shieldB == true)
+					{
+						OHvc.shieldB = true;
+						OHvc.defendYN = true;
+					}
+
+					if (holy == true)
+					{
+						OHvc.holy = true;
+
+					}
+					if (spectral == true)
+					{
+						OHvc.spectral = true;
+					}
+
+
+				}
+				else if (movementNumber == 1)
+				{
+					BHvc = new boatHouseVC();
+					this.NavigationController.PushViewController(BHvc, true);
+
+					BHvc.Player_Health = _PlayerHealth.Text;
+					BHvc.Player_Speed = _PlayerSpeed.Text;
+					BHvc.Player_Damage = _PlayerDamage.Text;
+					BHvc.HealthPotsString = _HealthPots.Text;
+
+					if (shieldB == true)
+					{
+						BHvc.shieldB = true;
+						BHvc.defendYN = true;
+					}
+
+					if (holy == true)
+					{
+						BHvc.holy = true;
+
+					}
+					if (spectral == true)
+					{
+						BHvc.spectral = true;
+					}
+				}
+				else if (movementNumber == 2)
+				{
+					Mvc = new mineVC();
+					this.NavigationController.PushViewController(Mvc, true);
+
+					Mvc.Player_Health = _PlayerHealth.Text;
+					Mvc.Player_Speed = _PlayerSpeed.Text;
+					Mvc.Player_Damage = _PlayerDamage.Text;
+					Mvc.HealthPotsString = _HealthPots.Text;
+
+					if (shieldB == true)
+					{
+						Mvc.shieldB = true;
+						Mvc.defendYN = true;
+					}
+
+					if (holy == true)
+					{
+						Mvc.holy = true;
+
+					}
+					if (spectral == true)
+					{
+						Mvc.spectral = true;
+					}
+
+				}
+				else if (movementNumber == 3)
+				{
+					FOrestvc = new forestVC();
+					this.NavigationController.PushViewController(FOrestvc, true);
+
+					FOrestvc.Player_Health = _PlayerHealth.Text;
+					FOrestvc.Player_Speed = _PlayerSpeed.Text;
+					FOrestvc.Player_Damage = _PlayerDamage.Text;
+					FOrestvc.HealthPotsString = _HealthPots.Text;
+
+					if (shieldB == true)
+					{
+						FOrestvc.shieldB = true;
+						FOrestvc.defendYN = true;
+					}
+
+					if (holy == true)
+					{
+						FOrestvc.holy = true;
+
+					}
+					if (spectral == true)
+					{
+						FOrestvc.spectral = true;
+					}
+				}
+				else if (movementNumber == 4)
+				{
+					Fvc = new fieldVC();
+					this.NavigationController.PushViewController(Fvc, true);
+
+					Fvc.Player_Health = _PlayerHealth.Text;
+					Fvc.Player_Speed = _PlayerSpeed.Text;
+					Fvc.Player_Damage = _PlayerDamage.Text;
+					Fvc.HealthPotsString = _HealthPots.Text;
+
+					if (shieldB == true)
+					{
+						Fvc.shieldB = true;
+						Fvc.defendYN = true;
+					}
+
+					if (holy == true)
+					{
+						Fvc.holy = true;
+
+					}
+					if (spectral == true)
+					{
+						Fvc.spectral = true;
+					}
+				}
+				else if (movementNumber == 5)
+				{
+					Lvc = new lakeVC();
+					this.NavigationController.PushViewController(Lvc, true);
+
+					Lvc.Player_Health = _PlayerHealth.Text;
+					Lvc.Player_Speed = _PlayerSpeed.Text;
+					Lvc.Player_Damage = _PlayerDamage.Text;
+					Lvc.HealthPotsString = _HealthPots.Text;
+
+					if (shieldB == true)
+					{
+						Lvc.shieldB = true;
+						Lvc.defendYN = true;
+					}
+
+					if (holy == true)
+					{
+						Lvc.holy = true;
+
+					}
+					if (spectral == true)
+					{
+						Lvc.spectral = true;
+					}
+				}
+			}
+			else
 			{
-				OHvc.holy = true;
-
+				string healed = "enermy alive travel inposible try run!!";
+				_LblNarrater.Text = healed;
 			}
-			if (spectral == true)
+			int PH = Int32.Parse(_PlayerHealth.Text);
+			if (PH <= 0)
 			{
-				OHvc.spectral = true;
+				string healed = "you have died your corps shall join the damed in hanting this place";
+				_LblNarrater.Text = healed;
+				_PlayerHealth.Text = "dead";
 			}
-
-
 		}
-		else if (movementNumber == 1)
-		{
-			BHvc = new boatHouseVC();
-			this.NavigationController.PushViewController(BHvc, true);
-
-			BHvc.Player_Health = _PlayerHealth.Text;
-			BHvc.Player_Speed = _PlayerSpeed.Text;
-			BHvc.Player_Damage = _PlayerDamage.Text;
-			BHvc.HealthPotsString = _HealthPots.Text;
-
-			if (shieldB == true)
-			{
-				BHvc.shieldB = true;
-				BHvc.defendYN = true;
-			}
-
-			if (holy == true)
-			{
-				BHvc.holy = true;
-
-			}
-			if (spectral == true)
-			{
-				BHvc.spectral = true;
-			}
-		}
-		else if (movementNumber == 2)
-		{
-			Mvc = new mineVC();
-			this.NavigationController.PushViewController(Mvc, true);
-
-			Mvc.Player_Health = _PlayerHealth.Text;
-			Mvc.Player_Speed = _PlayerSpeed.Text;
-			Mvc.Player_Damage = _PlayerDamage.Text;
-			Mvc.HealthPotsString = _HealthPots.Text;
-
-			if (shieldB == true)
-			{
-				Mvc.shieldB = true;
-				Mvc.defendYN = true;
-			}
-
-			if (holy == true)
-			{
-				Mvc.holy = true;
-
-			}
-			if (spectral == true)
-			{
-				Mvc.spectral = true;
-			}
-
-		}
-		else if (movementNumber == 3)
-		{
-			FOrestvc = new forestVC();
-			this.NavigationController.PushViewController(FOrestvc, true);
-
-			FOrestvc.Player_Health = _PlayerHealth.Text;
-			FOrestvc.Player_Speed = _PlayerSpeed.Text;
-			FOrestvc.Player_Damage = _PlayerDamage.Text;
-			FOrestvc.HealthPotsString = _HealthPots.Text;
-
-			if (shieldB == true)
-			{
-				FOrestvc.shieldB = true;
-				FOrestvc.defendYN = true;
-			}
-
-			if (holy == true)
-			{
-				FOrestvc.holy = true;
-
-			}
-			if (spectral == true)
-			{
-				FOrestvc.spectral = true;
-			}
-		}
-		else if (movementNumber == 4)
-		{
-			Fvc = new fieldVC();
-			this.NavigationController.PushViewController(Fvc, true);
-
-			Fvc.Player_Health = _PlayerHealth.Text;
-			Fvc.Player_Speed = _PlayerSpeed.Text;
-			Fvc.Player_Damage = _PlayerDamage.Text;
-			Fvc.HealthPotsString = _HealthPots.Text;
-
-			if (shieldB == true)
-			{
-				Fvc.shieldB = true;
-				Fvc.defendYN = true;
-			}
-
-			if (holy == true)
-			{
-				Fvc.holy = true;
-
-			}
-			if (spectral == true)
-			{
-				Fvc.spectral = true;
-			}
-		}
-		else if (movementNumber == 5)
-		{
-			Lvc = new lakeVC();
-			this.NavigationController.PushViewController(Lvc, true);
-
-			Lvc.Player_Health = _PlayerHealth.Text;
-			Lvc.Player_Speed = _PlayerSpeed.Text;
-			Lvc.Player_Damage = _PlayerDamage.Text;
-			Lvc.HealthPotsString = _HealthPots.Text;
-
-			if (shieldB == true)
-			{
-				Lvc.shieldB = true;
-				Lvc.defendYN = true;
-			}
-
-			if (holy == true)
-			{
-				Lvc.holy = true;
-
-			}
-			if (spectral == true)
-			{
-				Lvc.spectral = true;
-			}
-		}
-	}
-	else
-	{
-		string healed = "enermy alive travel inposible try run!!";
-		_LblNarrater.Text = healed;
-	}
-	int PH = Int32.Parse(_PlayerHealth.Text);
-	if (PH <= 0)
-	{
-		string healed = "you have died your corps shall join the damed in hanting this place";
-		_LblNarrater.Text = healed;
-		_PlayerHealth.Text = "dead";
-	}
-	}
 		//==========================================================pickup labels controler
 		public void pickups()
 		{

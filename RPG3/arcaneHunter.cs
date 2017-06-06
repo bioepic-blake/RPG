@@ -15,7 +15,7 @@ namespace RPG3
 
 		public override int _DamageSet()
 		{
-			_weaponDamage += 30;
+			_weaponDamage += 20;
 			return _weaponDamage;
 		}
 		public override int _HealthSet()

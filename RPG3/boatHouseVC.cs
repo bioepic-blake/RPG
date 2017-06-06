@@ -255,7 +255,7 @@ namespace RPG3
 				shieldB = true;
 				pickups();
 
-				string narator = $"the {EnermyName} fell apartin its bones you find the zombie's shield ";
+				string narator = $"the {EnermyName} is dead you find the zombie's shield ";
 				_LblNarrater.Text = narator;
 				//string pots = "2";
 				//_HealthPots.Text = pots;
@@ -359,7 +359,10 @@ namespace RPG3
 			_PlayerSpeed.Text = Player_Speed;
 			_PlayerDamage.Text = Player_Damage;
 			_HealthPots.Text = HealthPotsString;
-
+				if (string.IsNullOrEmpty(_HealthPots.Text))// if empty health pots text field = 0;
+			{
+				_HealthPots.Text = "0";
+			}
 		}
 
 		public void enermyIN()
@@ -381,7 +384,8 @@ namespace RPG3
 			string name = z.Name;
 			EnermyName = name;
 			string weapon = z.weaponName;
-			EnermyWeapon = weapon;               
+			EnermyWeapon = weapon;    
+		
 		}
 
 

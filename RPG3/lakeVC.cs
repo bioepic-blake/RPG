@@ -231,42 +231,49 @@ namespace RPG3
 		//============== player attack buttons  ===================================================
 		private void PlayerAttackBtnC(object sender, EventArgs e)
 		{
-			int Ehealth = Int32.Parse(_EnermyHealth.Text);
-			int Pdamage = Int32.Parse(_PlayerDamage.Text);
-			int result = Ehealth - Pdamage;
-			string resultS = result.ToString();
-
-			if (Ehealth <= 7)
-			{ travel = true; }
-
-			if (result >= 1)
+			if (spectral == true)
 			{
-				_EnermyHealth.Text = resultS;
+				int Ehealth = Int32.Parse(_EnermyHealth.Text);
+				int Pdamage = Int32.Parse(_PlayerDamage.Text);
+				int result = Ehealth - Pdamage;
+				string resultS = result.ToString();
 
-				string narator = $"you attacked for {_PlayerDamage.Text} damage";
+				if (Ehealth <= 7)
+				{ travel = true; }
+
+				if (result >= 1)
+				{
+					_EnermyHealth.Text = resultS;
+
+					string narator = $"you attacked for {_PlayerDamage.Text} damage";
+					_LblNarrater.Text = narator;
+					enermyAttack();
+				}
+				else if (result <= 0)
+				{
+					_EnermyHealth.Text = "dead";
+					enermyDead = true;
+					travel = true;
+
+
+					string narator = $"the {EnermyName} fell apartin its bones you find 2 health pots ";
+					_LblNarrater.Text = narator;
+					string pots = "2";
+					_HealthPots.Text = pots;
+				}
+				int PH = Int32.Parse(_PlayerHealth.Text);
+				if (PH <= 0)
+				{
+					string healed = "you have died your corps shall join the damed in hanting this place";
+					_LblNarrater.Text = healed;
+					_PlayerHealth.Text = "dead";
+				}
+			}
+			else 
+			{
+				string narator = "no efective wepon paddle faster";
 				_LblNarrater.Text = narator;
-				enermyAttack();
 			}
-			else if (result <= 0)
-			{
-				_EnermyHealth.Text = "dead";
-				enermyDead = true;
-				travel = true;
-
-
-				string narator = $"the {EnermyName} fell apartin its bones you find 2 health pots ";
-				_LblNarrater.Text = narator;
-				string pots = "2";
-				_HealthPots.Text = pots;
-			}
-			int PH = Int32.Parse(_PlayerHealth.Text);
-			if (PH <= 0)
-			{
-				string healed = "you have died your corps shall join the damed in hanting this place";
-				_LblNarrater.Text = healed;
-				_PlayerHealth.Text = "dead";
-			}
-
 		}
 		private void PlayerDefendBtnC(object sender, EventArgs e)//============================defend button
 		{
@@ -358,6 +365,10 @@ namespace RPG3
 			_PlayerSpeed.Text = Player_Speed;
 			_PlayerDamage.Text = Player_Damage;
 			_HealthPots.Text = HealthPotsString;
+				if (string.IsNullOrEmpty(_HealthPots.Text))// if empty health pots text field = 0;
+			{
+				_HealthPots.Text = "0";
+			}
 		}
 
 

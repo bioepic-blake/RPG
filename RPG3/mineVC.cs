@@ -252,12 +252,13 @@ namespace RPG3
 					_EnermyHealth.Text = "dead";
 					enermyDead = true;
 					travel = true;
+					spectral = true;
+                    pickups();
 
-
-					string narator = $"the {EnermyName} fell apartin its bones you find 2 health pots ";
+					string narator = $"the {EnermyName} fades away leaving behind a spectral tear ";
 					_LblNarrater.Text = narator;
-					string pots = "2";
-					_HealthPots.Text = pots;
+				//	string pots = "2";
+				//	_HealthPots.Text = pots;
 				}
 				int PH = Int32.Parse(_PlayerHealth.Text);
 				if (PH <= 0)
@@ -363,6 +364,10 @@ namespace RPG3
 			_PlayerSpeed.Text = Player_Speed;
 			_PlayerDamage.Text = Player_Damage;
 			_HealthPots.Text = HealthPotsString;
+				if (string.IsNullOrEmpty(_HealthPots.Text))// if empty health pots text field = 0;
+			{
+				_HealthPots.Text = "0";
+			}
 		}
 
 		//=============================================enermy inheritance looped results

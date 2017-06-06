@@ -254,8 +254,11 @@ namespace RPG3
 
 				string narator = $"the {EnermyName} fell apartin its bones you find 2 health pots ";
 				_LblNarrater.Text = narator;
-				string pots = "2";
-				_HealthPots.Text = pots;
+
+				int potsInt = Int32.Parse(_HealthPots.Text);
+				potsInt += 2;
+				string pots1 = potsInt.ToString();
+				_HealthPots.Text = pots1;
 			}
 			int PH = Int32.Parse(_PlayerHealth.Text);
 			if (PH <= 0)
@@ -356,6 +359,10 @@ namespace RPG3
 			_PlayerSpeed.Text = Player_Speed;
 			_PlayerDamage.Text = Player_Damage;
 			_HealthPots.Text = HealthPotsString;
+				if (string.IsNullOrEmpty(_HealthPots.Text))// if empty health pots text field = 0;
+			{
+				_HealthPots.Text = "0";
+			}
 		}
 
 

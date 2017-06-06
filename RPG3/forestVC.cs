@@ -251,6 +251,7 @@ namespace RPG3
 				enermyDead = true;
 				travel = true;
 				holy = true;
+                pickups();
 
 				string narator = $"the {EnermyName} is dead you take his holy crosbow giving you damage aganst unholy goast's ";
 				_LblNarrater.Text = narator;
@@ -358,6 +359,10 @@ namespace RPG3
 			_PlayerSpeed.Text = Player_Speed;
 			_PlayerDamage.Text = Player_Damage;
 			_HealthPots.Text = HealthPotsString;
+				if (string.IsNullOrEmpty(_HealthPots.Text))// if empty health pots text field = 0;
+			{
+				_HealthPots.Text = "0";
+			}
 		}
 
 		public void enermyIN()
