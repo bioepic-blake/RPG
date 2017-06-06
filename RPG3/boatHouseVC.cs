@@ -85,7 +85,7 @@ namespace RPG3
 
 			base.ViewDidLoad();
 
-			NavigationItem.Title = "OLD HOUSE";
+			NavigationItem.Title = "boat House";
 			View.BackgroundColor = UIColor.White;
 
 			//======textfields
@@ -97,7 +97,7 @@ namespace RPG3
 			ESpeed();
 
 			//============ labels
-			LblNt();
+
 			lblPdamageM();
 			lblPspeedM();
 			lblPhealth();
@@ -124,6 +124,7 @@ namespace RPG3
 			//===================other methods to call 
 			arrayArea();
 			enermyIN();
+            LblNt();
 			startAreaString();
 			playerStatsM();
 			pickups();
@@ -201,7 +202,7 @@ namespace RPG3
 		{
 			int Phelth = Int32.Parse(_PlayerHealth.Text);
 			int Edamage = Int32.Parse(_Enermydamage.Text);
-			Edamage = Edamage / 2;
+			Edamage = Edamage / 4;
 			int result = Phelth - Edamage;
 			string resultS = result.ToString();
 
@@ -251,12 +252,13 @@ namespace RPG3
 				_EnermyHealth.Text = "dead";
 				enermyDead = true;
 				travel = true;
+				shieldB = true;
+				pickups();
 
-
-				string narator = $"the {EnermyName} fell apartin its bones you find 2 health pots ";
+				string narator = $"the {EnermyName} fell apartin its bones you find the zombie's shield ";
 				_LblNarrater.Text = narator;
-				string pots = "2";
-				_HealthPots.Text = pots;
+				//string pots = "2";
+				//_HealthPots.Text = pots;
 			}
 			int PH = Int32.Parse(_PlayerHealth.Text);
 			if (PH <= 0)
@@ -271,7 +273,7 @@ namespace RPG3
 		{
 			if (defendYN == true)
 			{
-				string narator = $" you hid behind the shiled taking half damage ";
+				string narator = $" you hid behind the shiled taking no damage ";
 				_LblNarrater.Text = narator;
 				enermyAttackHalf();
 			}
@@ -356,11 +358,13 @@ namespace RPG3
 			_PlayerHealth.Text = Player_Health;
 			_PlayerSpeed.Text = Player_Speed;
 			_PlayerDamage.Text = Player_Damage;
+			_HealthPots.Text = HealthPotsString;
+
 		}
 
 		public void enermyIN()
 		{
-			enermy zombie = new zombie("zombie", "hands");
+			enermy zombie = new zombie("zombie", "shield");
 
 			List<enermy> enermys = new List<enermy>()
 			{
@@ -373,6 +377,11 @@ namespace RPG3
 				_EnermySpeed.Text = i._speedSet().ToString();
 				_Enermydamage.Text = i._DamageSet().ToString();
 			}
+			zombie z = new zombie("zombie", "shield");
+			string name = z.Name;
+			EnermyName = name;
+			string weapon = z.weaponName;
+			EnermyWeapon = weapon;               
 		}
 
 
@@ -394,9 +403,22 @@ namespace RPG3
 					OHvc.Player_Damage = _PlayerDamage.Text;
 					OHvc.HealthPotsString = _HealthPots.Text;
 
-					OHvc.shieldB = shieldB;
-					OHvc.holy = holy;
-					OHvc.spectral = spectral;
+					if (shieldB == true)
+					{
+						OHvc.shieldB = true;
+						OHvc.defendYN = true;
+					}
+
+					if (holy == true)
+					{
+						OHvc.holy = true;
+
+					}
+					if (spectral == true) 
+					{
+						OHvc.spectral = true;
+					}
+
 
 				}
 				else if (movementNumber == 1)
@@ -409,9 +431,21 @@ namespace RPG3
 					BHvc.Player_Damage = _PlayerDamage.Text;
 					BHvc.HealthPotsString = _HealthPots.Text;
 
-					//BHvc.shieldB = shieldB;
-					//BHvc.holy = holy;
-					//BHvc.spectral = spectral;
+				if (shieldB == true)
+					{
+						BHvc.shieldB = true;
+						BHvc.defendYN = true;
+					}
+
+					if (holy == true)
+					{
+						BHvc.holy = true;
+
+					}
+					if (spectral == true) 
+					{
+						BHvc.spectral = true;
+					}
 				}
 				else if (movementNumber == 2)
 				{
@@ -423,9 +457,21 @@ namespace RPG3
 					Mvc.Player_Damage = _PlayerDamage.Text;
 					Mvc.HealthPotsString = _HealthPots.Text;
 
-					//Mvc.shieldB = shieldB;
-					//Mvc.holy = holy;
-					//Mvc.spectral = spectral;
+					if (shieldB == true)
+					{
+						Mvc.shieldB = true;
+						Mvc.defendYN = true;
+					}
+
+					if (holy == true)
+					{
+						Mvc.holy = true;
+
+					}
+					if (spectral == true) 
+					{
+						Mvc.spectral = true;
+					}
 
 				}
 				else if (movementNumber == 3)
@@ -438,9 +484,21 @@ namespace RPG3
 					FOrestvc.Player_Damage = _PlayerDamage.Text;
 					FOrestvc.HealthPotsString = _HealthPots.Text;
 
-					//FOrestvc.shieldB = shieldB;
-					//FOrestvc.holy = holy;
-					//FOrestvc.spectral = spectral;
+				if (shieldB == true)
+					{
+						FOrestvc.shieldB = true;
+						FOrestvc.defendYN = true;
+					}
+
+					if (holy == true)
+					{
+						FOrestvc.holy = true;
+
+					}
+					if (spectral == true) 
+					{
+						FOrestvc.spectral = true;
+					}
 				}
 				else if (movementNumber == 4)
 				{
@@ -452,9 +510,21 @@ namespace RPG3
 					Fvc.Player_Damage = _PlayerDamage.Text;
 					Fvc.HealthPotsString = _HealthPots.Text;
 
-					//Fvc.shieldB = shieldB;
-					//Fvc.holy = holy;
-					//Fvc.spectral = spectral;
+					if (shieldB == true)
+					{
+						Fvc.shieldB = true;
+						Fvc.defendYN = true;
+					}
+
+					if (holy == true)
+					{
+						Fvc.holy = true;
+
+					}
+					if (spectral == true) 
+					{
+						Fvc.spectral = true;
+					}
 				}
 				else if (movementNumber == 5)
 				{
@@ -466,9 +536,21 @@ namespace RPG3
 					Lvc.Player_Damage = _PlayerDamage.Text;
 					Lvc.HealthPotsString = _HealthPots.Text;
 
-					//Lvc.shieldB = shieldB;
-					//Lvc.holy = holy;
-					//Lvc.spectral = spectral;
+					if (shieldB == true)
+					{
+						Lvc.shieldB = true;
+						Lvc.defendYN = true;
+					}
+
+					if (holy == true)
+					{
+						Lvc.holy = true;
+
+					}
+					if (spectral == true) 
+					{
+						Lvc.spectral = true;
+					}
 				}
 			}
 			else
@@ -756,7 +838,7 @@ namespace RPG3
 			_LblNarrater.Lines = 10;
 			//_LblNarraterText.Layer.BorderWidth = 1f;
 			//_LblNarraterText.Layer.BorderColor = UIColor.Black.CGColor;
-			_LblNarrater.Text = "you enter the old house and are attacked by a skeleton";
+			_LblNarrater.Text = $"you enter the boat house and are attacked by a {EnermyName} using a {EnermyWeapon} ";
 			View.Add(_LblNarrater);
 		}
 		public void lblPspeedM()

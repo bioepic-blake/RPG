@@ -4,13 +4,15 @@ namespace RPG3
 	public class SkeletonWorrior : enermy
 	{
 
-		//public string weaponName { get; set; }
+		public string weaponName { get; set; }
+		public string Name { get; set; }
 
 		public SkeletonWorrior(string name, string WeaponS)
 			: base(name, WeaponS)
 
 		{
-		//	weaponName = WeaponS;
+			Name = name;
+		weaponName = WeaponS;
 		}
 
 		public string getWeapon()

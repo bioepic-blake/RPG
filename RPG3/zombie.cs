@@ -4,12 +4,13 @@ namespace RPG3
 	public class zombie : enermy
 	{
 		public string weaponName { get; set; }
+		public string Name { get; set; }
 
 		public zombie(string name, string WeaponS)
 			: base(name, WeaponS)
 		{
 			weaponName = WeaponS;
-
+			Name = name;
 		}
 		public override int _DamageSet()
 		{
@@ -18,13 +19,13 @@ namespace RPG3
 		}
 		public override int _HealthSet()
 		{
-			_health += 80;
+			_health += 50;
 			return _health;
 		}
 		public override int _speedSet()
 		{
 			_speed += 2;
-			return _health;
+			return _speed;
 		}
 		public override string ToString()
 		{

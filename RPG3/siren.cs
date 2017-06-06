@@ -5,10 +5,12 @@ namespace RPG3
 	{
 
 		public string weaponName { get; set; }
+		public string Name { get; set; }
 
 		public siren(string name, string WeaponS)
 			: base(name, WeaponS)
 		{
+			Name = name;
 			weaponName = WeaponS;
 		}
 

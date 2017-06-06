@@ -4,10 +4,12 @@ namespace RPG3
 	public class arcaneHunter : enermy
 	{
 		public string weaponName { get; set; }
+		public string Name { get; set; }
 
 		public arcaneHunter(string name, string WeaponS)
 			: base(name, WeaponS)
 		{
+			Name = name;
 			weaponName = WeaponS;
 		}
 

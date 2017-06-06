@@ -82,7 +82,7 @@ namespace RPG3
 		{
 			base.ViewDidLoad();
 
-			NavigationItem.Title = "Mine";
+			NavigationItem.Title = "mine";
 			View.BackgroundColor = UIColor.White;
 
 			//======textfields
@@ -94,7 +94,7 @@ namespace RPG3
 			ESpeed();
 
 			//============ labels
-			LblNt();
+
 			lblPdamageM();
 			lblPspeedM();
 			lblPhealth();
@@ -121,6 +121,7 @@ namespace RPG3
 			//===================other methods to call 
 			arrayArea();
 			enermyIN();
+			LblNt();
 			startAreaString();
 			playerStatsM();
 			pickups();
@@ -132,6 +133,7 @@ namespace RPG3
 			_playerRunBtn.TouchUpInside += PlayerRunBtnC;
 			_playerHealBtn.TouchUpInside += PlayerHealBtnC;
 			_PlayerDefendBtn.TouchUpInside += PlayerDefendBtnC;
+
 
 		}
 		//==============enermy attack method ==================================
@@ -195,9 +197,10 @@ namespace RPG3
 		}
 		public void enermyAttackHalf()//============================== enermy half damage
 		{
+
 			int Phelth = Int32.Parse(_PlayerHealth.Text);
 			int Edamage = Int32.Parse(_Enermydamage.Text);
-			Edamage = Edamage / 2;
+			Edamage = Edamage / 4;
 			int result = Phelth - Edamage;
 			string resultS = result.ToString();
 
@@ -226,47 +229,55 @@ namespace RPG3
 		//============== player attack buttons  ===================================================
 		private void PlayerAttackBtnC(object sender, EventArgs e)
 		{
-			int Ehealth = Int32.Parse(_EnermyHealth.Text);
-			int Pdamage = Int32.Parse(_PlayerDamage.Text);
-			int result = Ehealth - Pdamage;
-			string resultS = result.ToString();
-
-			if (Ehealth <= 7)
-			{ travel = true; }
-
-			if (result >= 1)
+			if (holy == true)
 			{
-				_EnermyHealth.Text = resultS;
+				int Ehealth = Int32.Parse(_EnermyHealth.Text);
+				int Pdamage = Int32.Parse(_PlayerDamage.Text);
+				int result = Ehealth - Pdamage;
+				string resultS = result.ToString();
 
-				string narator = $"you attacked for {_PlayerDamage.Text} damage";
+				if (Ehealth <= 7)
+				{ travel = true; }
+
+				if (result >= 1)
+				{
+					_EnermyHealth.Text = resultS;
+
+					string narator = $"you attacked for {_PlayerDamage.Text} damage";
+					_LblNarrater.Text = narator;
+					enermyAttack();
+				}
+				else if (result <= 0)
+				{
+					_EnermyHealth.Text = "dead";
+					enermyDead = true;
+					travel = true;
+
+
+					string narator = $"the {EnermyName} fell apartin its bones you find 2 health pots ";
+					_LblNarrater.Text = narator;
+					string pots = "2";
+					_HealthPots.Text = pots;
+				}
+				int PH = Int32.Parse(_PlayerHealth.Text);
+				if (PH <= 0)
+				{
+					string healed = "you have died your corps shall join the damed in hanting this place";
+					_LblNarrater.Text = healed;
+					_PlayerHealth.Text = "dead";
+				}
+			}
+			else
+			{
+				string narator = "you have no wepon that can harm a goast";
 				_LblNarrater.Text = narator;
-				enermyAttack();
 			}
-			else if (result <= 0)
-			{
-				_EnermyHealth.Text = "dead";
-				enermyDead = true;
-				travel = true;
-
-				string narator = $"the {EnermyName} fell apartin its bones you find 2 health pots ";
-				_LblNarrater.Text = narator;
-				string pots = "2";
-				_HealthPots.Text = pots;
-			}
-			int PH = Int32.Parse(_PlayerHealth.Text);
-			if (PH <= 0)
-			{
-				string healed = "you have died your corps shall join the damed in hanting this place";
-				_LblNarrater.Text = healed;
-				_PlayerHealth.Text = "dead";
-			}
-
 		}
 		private void PlayerDefendBtnC(object sender, EventArgs e)//============================defend button
 		{
 			if (defendYN == true)
 			{
-				string narator = $" you hid behind the shiled taking half damage ";
+				string narator = $" you hid behind the shiled taking no damage ";
 				_LblNarrater.Text = narator;
 				enermyAttackHalf();
 			}
@@ -351,6 +362,7 @@ namespace RPG3
 			_PlayerHealth.Text = Player_Health;
 			_PlayerSpeed.Text = Player_Speed;
 			_PlayerDamage.Text = Player_Damage;
+			_HealthPots.Text = HealthPotsString;
 		}
 
 		//=============================================enermy inheritance looped results
@@ -369,120 +381,195 @@ namespace RPG3
 				_EnermySpeed.Text = i._speedSet().ToString();
 				_Enermydamage.Text = i._DamageSet().ToString();
 			}
+			goast g = new goast("goast", "phickic energy");
+			string name = g.Name;
+			EnermyName = name;
+			string weapon = g.weaponName;
+			EnermyWeapon = weapon;
 		}
 
 
 
 
-		//================================= button controles 
-		//=================================  travel ( view controler ) button //controles 
-		private void BtnTravelC(object sender, EventArgs e)
+private void BtnTravelC(object sender, EventArgs e)
+{
+	if (travel == true)
+	{
+
+
+		if (movementNumber == 0)
 		{
-			if (travel == true)
+			OHvc = new oldHouseVC();
+			this.NavigationController.PushViewController(OHvc, true);
+
+			OHvc.Player_Health = _PlayerHealth.Text;
+			OHvc.Player_Speed = _PlayerSpeed.Text;
+			OHvc.Player_Damage = _PlayerDamage.Text;
+			OHvc.HealthPotsString = _HealthPots.Text;
+
+			if (shieldB == true)
 			{
-
-
-				if (movementNumber == 0)
-				{
-					OHvc = new oldHouseVC();
-					this.NavigationController.PushViewController(OHvc, true);
-
-					OHvc.Player_Health = _PlayerHealth.Text;
-					OHvc.Player_Speed = _PlayerSpeed.Text;
-					OHvc.Player_Damage = _PlayerDamage.Text;
-					OHvc.HealthPotsString = _HealthPots.Text;
-
-					OHvc.shieldB = shieldB;
-					OHvc.holy = holy;
-					OHvc.spectral = spectral;
-
-				}
-				else if (movementNumber == 1)
-				{
-					BHvc = new boatHouseVC();
-					this.NavigationController.PushViewController(BHvc, true);
-
-					BHvc.Player_Health = _PlayerHealth.Text;
-					BHvc.Player_Speed = _PlayerSpeed.Text;
-					BHvc.Player_Damage = _PlayerDamage.Text;
-					BHvc.HealthPotsString = _HealthPots.Text;
-
-					//BHvc.shieldB = shieldB;
-					//BHvc.holy = holy;
-					//BHvc.spectral = spectral;
-				}
-				else if (movementNumber == 2)
-				{
-					Mvc = new mineVC();
-					this.NavigationController.PushViewController(Mvc, true);
-
-					Mvc.Player_Health = _PlayerHealth.Text;
-					Mvc.Player_Speed = _PlayerSpeed.Text;
-					Mvc.Player_Damage = _PlayerDamage.Text;
-					Mvc.HealthPotsString = _HealthPots.Text;
-
-					//Mvc.shieldB = shieldB;
-					//Mvc.holy = holy;
-					//Mvc.spectral = spectral;
-
-				}
-				else if (movementNumber == 3)
-				{
-					FOrestvc = new forestVC();
-					this.NavigationController.PushViewController(FOrestvc, true);
-
-					FOrestvc.Player_Health = _PlayerHealth.Text;
-					FOrestvc.Player_Speed = _PlayerSpeed.Text;
-					FOrestvc.Player_Damage = _PlayerDamage.Text;
-					FOrestvc.HealthPotsString = _HealthPots.Text;
-
-					//FOrestvc.shieldB = shieldB;
-					//FOrestvc.holy = holy;
-					//FOrestvc.spectral = spectral;
-				}
-				else if (movementNumber == 4)
-				{
-					Fvc = new fieldVC();
-					this.NavigationController.PushViewController(Fvc, true);
-
-					Fvc.Player_Health = _PlayerHealth.Text;
-					Fvc.Player_Speed = _PlayerSpeed.Text;
-					Fvc.Player_Damage = _PlayerDamage.Text;
-					Fvc.HealthPotsString = _HealthPots.Text;
-
-					//Fvc.shieldB = shieldB;
-					//Fvc.holy = holy;
-					//Fvc.spectral = spectral;
-				}
-				else if (movementNumber == 5)
-				{
-					Lvc = new lakeVC();
-					this.NavigationController.PushViewController(Lvc, true);
-
-					Lvc.Player_Health = _PlayerHealth.Text;
-					Lvc.Player_Speed = _PlayerSpeed.Text;
-					Lvc.Player_Damage = _PlayerDamage.Text;
-					Lvc.HealthPotsString = _HealthPots.Text;
-
-					//Lvc.shieldB = shieldB;
-					//Lvc.holy = holy;
-					//Lvc.spectral = spectral;
-				}
+				OHvc.shieldB = true;
+				OHvc.defendYN = true;
 			}
-			else
+
+			if (holy == true)
 			{
-				string healed = "enermy alive travel inposible try run!!";
-				_LblNarrater.Text = healed;
+				OHvc.holy = true;
+
 			}
-			int PH = Int32.Parse(_PlayerHealth.Text);
-			if (PH <= 0)
+			if (spectral == true)
 			{
-				string healed = "you have died your corps shall join the damed in hanting this place";
-				_LblNarrater.Text = healed;
-				_PlayerHealth.Text = "dead";
+				OHvc.spectral = true;
+			}
+
+
+		}
+		else if (movementNumber == 1)
+		{
+			BHvc = new boatHouseVC();
+			this.NavigationController.PushViewController(BHvc, true);
+
+			BHvc.Player_Health = _PlayerHealth.Text;
+			BHvc.Player_Speed = _PlayerSpeed.Text;
+			BHvc.Player_Damage = _PlayerDamage.Text;
+			BHvc.HealthPotsString = _HealthPots.Text;
+
+			if (shieldB == true)
+			{
+				BHvc.shieldB = true;
+				BHvc.defendYN = true;
+			}
+
+			if (holy == true)
+			{
+				BHvc.holy = true;
+
+			}
+			if (spectral == true)
+			{
+				BHvc.spectral = true;
+			}
+		}
+		else if (movementNumber == 2)
+		{
+			Mvc = new mineVC();
+			this.NavigationController.PushViewController(Mvc, true);
+
+			Mvc.Player_Health = _PlayerHealth.Text;
+			Mvc.Player_Speed = _PlayerSpeed.Text;
+			Mvc.Player_Damage = _PlayerDamage.Text;
+			Mvc.HealthPotsString = _HealthPots.Text;
+
+			if (shieldB == true)
+			{
+				Mvc.shieldB = true;
+				Mvc.defendYN = true;
+			}
+
+			if (holy == true)
+			{
+				Mvc.holy = true;
+
+			}
+			if (spectral == true)
+			{
+				Mvc.spectral = true;
 			}
 
 		}
+		else if (movementNumber == 3)
+		{
+			FOrestvc = new forestVC();
+			this.NavigationController.PushViewController(FOrestvc, true);
+
+			FOrestvc.Player_Health = _PlayerHealth.Text;
+			FOrestvc.Player_Speed = _PlayerSpeed.Text;
+			FOrestvc.Player_Damage = _PlayerDamage.Text;
+			FOrestvc.HealthPotsString = _HealthPots.Text;
+
+			if (shieldB == true)
+			{
+				FOrestvc.shieldB = true;
+				FOrestvc.defendYN = true;
+			}
+
+			if (holy == true)
+			{
+				FOrestvc.holy = true;
+
+			}
+			if (spectral == true)
+			{
+				FOrestvc.spectral = true;
+			}
+		}
+		else if (movementNumber == 4)
+		{
+			Fvc = new fieldVC();
+			this.NavigationController.PushViewController(Fvc, true);
+
+			Fvc.Player_Health = _PlayerHealth.Text;
+			Fvc.Player_Speed = _PlayerSpeed.Text;
+			Fvc.Player_Damage = _PlayerDamage.Text;
+			Fvc.HealthPotsString = _HealthPots.Text;
+
+			if (shieldB == true)
+			{
+				Fvc.shieldB = true;
+				Fvc.defendYN = true;
+			}
+
+			if (holy == true)
+			{
+				Fvc.holy = true;
+
+			}
+			if (spectral == true)
+			{
+				Fvc.spectral = true;
+			}
+		}
+		else if (movementNumber == 5)
+		{
+			Lvc = new lakeVC();
+			this.NavigationController.PushViewController(Lvc, true);
+
+			Lvc.Player_Health = _PlayerHealth.Text;
+			Lvc.Player_Speed = _PlayerSpeed.Text;
+			Lvc.Player_Damage = _PlayerDamage.Text;
+			Lvc.HealthPotsString = _HealthPots.Text;
+
+			if (shieldB == true)
+			{
+				Lvc.shieldB = true;
+				Lvc.defendYN = true;
+			}
+
+			if (holy == true)
+			{
+				Lvc.holy = true;
+
+			}
+			if (spectral == true)
+			{
+				Lvc.spectral = true;
+			}
+		}
+	}
+	else
+	{
+		string healed = "enermy alive travel inposible try run!!";
+		_LblNarrater.Text = healed;
+	}
+	int PH = Int32.Parse(_PlayerHealth.Text);
+	if (PH <= 0)
+	{
+		string healed = "you have died your corps shall join the damed in hanting this place";
+		_LblNarrater.Text = healed;
+		_PlayerHealth.Text = "dead";
+	}
+	}
 		//==========================================================pickup labels controler
 		public void pickups()
 		{
@@ -754,7 +841,7 @@ namespace RPG3
 			_LblNarrater.Lines = 10;
 			//_LblNarraterText.Layer.BorderWidth = 1f;
 			//_LblNarraterText.Layer.BorderColor = UIColor.Black.CGColor;
-			_LblNarrater.Text = "you enter the old house and are attacked by a skeleton";
+			_LblNarrater.Text = $"you enter the mine and are attacked by a {EnermyName} using a {EnermyWeapon} ";
 			View.Add(_LblNarrater);
 		}
 		public void lblPspeedM()
