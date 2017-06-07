@@ -1,0 +1,21 @@
+﻿<Properties StartupConfiguration="{C856D6B8-E7B0-4D74-A3D8-97AB8E05F760}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="oldHouseVC.cs">
+    <Files>
+      <File FileName="ViewController.cs" Line="52" Column="23" />
+      <File FileName="oldHouseVC.cs" Line="739" Column="37" />
+      <File FileName="boatHouseVC.cs" Line="272" Column="4" />
+      <File FileName="mineVC.cs" Line="295" Column="12" />
+      <File FileName="forestVC.cs" Line="720" Column="5" />
+      <File FileName="fieldVC.cs" Line="277" Column="4" />
+      <File FileName="lakeVC.cs" Line="90" Column="1" />
+      <File FileName="DeadViewControler.cs" Line="29" Column="23" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.RPG3 PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.CA8C4211-A6FD-4A58-99F9-7CDCD50A0A76" />
+  <MultiItemStartupConfigurations />
+</Properties>
