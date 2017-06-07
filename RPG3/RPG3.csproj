@@ -120,6 +120,7 @@
     <Compile Include="Player.cs" />
     <Compile Include="playerInheritance.cs" />
     <Compile Include="playerStatsControl.cs" />
+    <Compile Include="DeadViewControler.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

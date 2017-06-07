@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using CoreGraphics;
 using UIKit;
+using System.Threading.Tasks;
 
 namespace RPG3
 {
 	public class forestVC : UIViewController
 	{
 
-
+DeadViewControler dcv;
 		oldHouseVC OHvc;
 		boatHouseVC BHvc;
 		mineVC Mvc;
@@ -165,6 +166,7 @@ namespace RPG3
 				_LblNarrater.Text = healed;
 				_PlayerHealth.Text = "dead";
 			}
+            Exit();
 		}
 		public void enermyAttackDouble()//================enermy doble damage=========
 		{
@@ -195,6 +197,7 @@ namespace RPG3
 				_LblNarrater.Text = healed;
 				_PlayerHealth.Text = "dead";
 			}
+            Exit();
 		}
 		public void enermyAttackHalf()//============================== enermy half damage
 		{
@@ -225,49 +228,57 @@ namespace RPG3
 				_LblNarrater.Text = healed;
 				_PlayerHealth.Text = "dead";
 			}
+            Exit();
 		}
 		//============== player attack buttons  ===================================================
 		private void PlayerAttackBtnC(object sender, EventArgs e)
 		{
-			int Ehealth = Int32.Parse(_EnermyHealth.Text);
-			int Pdamage = Int32.Parse(_PlayerDamage.Text);
-			int result = Ehealth - Pdamage;
-			string resultS = result.ToString();
-
-			if (Ehealth <= 7)
-			{ travel = true; }
-
-			if (result >= 1)
+			try
 			{
-				_EnermyHealth.Text = resultS;
+				int Ehealth = Int32.Parse(_EnermyHealth.Text);
+				int Pdamage = Int32.Parse(_PlayerDamage.Text);
+				int result = Ehealth - Pdamage;
+				string resultS = result.ToString();
 
-				string narator = $"you attacked for {_PlayerDamage.Text} damage";
-				_LblNarrater.Text = narator;
-				enermyAttack();
+				if (Ehealth <= 7)
+				{ travel = true; }
+
+				if (result >= 1)
+				{
+					_EnermyHealth.Text = resultS;
+
+					string narator = $"you attacked for {_PlayerDamage.Text} damage";
+					_LblNarrater.Text = narator;
+					enermyAttack();
+				}
+				else if (result <= 0)
+				{
+					_EnermyHealth.Text = "dead";
+					enermyDead = true;
+					travel = true;
+					holy = true;
+					pickups();
+
+					string narator = $"the {EnermyName} is dead you take his holy crosbow giving you damage aganst unholy goast's ";
+					_LblNarrater.Text = narator;
+
+					//string pots = "2";
+					//_HealthPots.Text = pots;
+
+				}
+				int PH = Int32.Parse(_PlayerHealth.Text);
+				if (PH <= 0)
+				{
+					string healed = "you have died your corps shall join the damed in hanting this place";
+					_LblNarrater.Text = healed;
+					_PlayerHealth.Text = "dead";
+				}
 			}
-			else if (result <= 0)
+			catch
 			{
-				_EnermyHealth.Text = "dead";
-				enermyDead = true;
-				travel = true;
-				holy = true;
-                pickups();
-
-				string narator = $"the {EnermyName} is dead you take his holy crosbow giving you damage aganst unholy goast's ";
-				_LblNarrater.Text = narator;
-
-				//string pots = "2";
-				//_HealthPots.Text = pots;
-
+				string EnermyIsDead = "you cant attack a dead enermy";
+				_LblNarrater.Text = EnermyIsDead;
 			}
-			int PH = Int32.Parse(_PlayerHealth.Text);
-			if (PH <= 0)
-			{
-				string healed = "you have died your corps shall join the damed in hanting this place";
-				_LblNarrater.Text = healed;
-				_PlayerHealth.Text = "dead";
-			}
-
 		}
 		private void PlayerDefendBtnC(object sender, EventArgs e)//============================defend button
 		{
@@ -327,6 +338,7 @@ namespace RPG3
 		}
 		private void PlayerHealBtnC(object sender, EventArgs e)//======================heal button
 		{
+			try{
 			int pots = Int32.Parse(_HealthPots.Text);
 			if (pots >= 1)
 			{
@@ -347,6 +359,8 @@ namespace RPG3
 				_LblNarrater.Text = healed;
 				enermyAttack();
 			}
+				}
+			catch { }
 		}
 
 
@@ -359,7 +373,7 @@ namespace RPG3
 			_PlayerSpeed.Text = Player_Speed;
 			_PlayerDamage.Text = Player_Damage;
 			_HealthPots.Text = HealthPotsString;
-				if (string.IsNullOrEmpty(_HealthPots.Text))// if empty health pots text field = 0;
+			if (string.IsNullOrEmpty(_HealthPots.Text))// if empty health pots text field = 0;
 			{
 				_HealthPots.Text = "0";
 			}
@@ -367,7 +381,7 @@ namespace RPG3
 
 		public void enermyIN()
 		{
-			enermy arcaneHunter = new arcaneHunter("hunter", "Holy crosbow");
+			enermy arcaneHunter = new arcaneHunter("Arcane hunter", "Holy crosbow");
 			List<enermy> enermys = new List<enermy>()
 			{
 				arcaneHunter
@@ -713,7 +727,18 @@ namespace RPG3
 			}
 		}
 
-		//===========================battle buttons 
+		//===========================if player is dead
+		public async Task Exit()
+		{
+			if (_PlayerHealth.Text == "dead")
+			{
+				await Task.Delay(1000);
+				dcv = new DeadViewControler();
+				this.NavigationController.PushViewController(dcv, true);
+
+			}
+		}
+
 
 
 
